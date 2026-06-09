@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050505"/>
+      <stop offset="0.55" stop-color="#111827"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <radialGradient id="r" cx="65%" cy="35%" r="60%">
+      <stop offset="0" stop-color="#FF6A00" stop-opacity="0.55"/>
+      <stop offset="0.35" stop-color="#FF6A00" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <rect width="1600" height="900" fill="url(#r)"/>
+  <g opacity="0.22">
+    <circle cx="250" cy="760" r="220" fill="#FF6A00" filter="url(#blur)"/>
+    <circle cx="1260" cy="130" r="180" fill="#2563eb" filter="url(#blur)"/>
+  </g>
+  <g stroke="#FF6A00" stroke-opacity="0.35" stroke-width="4" fill="none">
+    <path d="M0 690 C360 540, 650 810, 1600 590"/>
+    <path d="M0 760 C420 600, 760 870, 1600 690"/>
+  </g>
+  <g opacity="0.8">
+    <rect x="190" y="255" width="1220" height="390" rx="26" fill="#050505" fill-opacity="0.42" stroke="#fff" stroke-opacity="0.08"/>
+    <text x="800" y="420" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="72" font-weight="900" fill="#fff">FEIRA E CONGRESSO</text>
+    <text x="800" y="500" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="32" font-weight="600" fill="#FF6A00">Experiência profissional</text>
+  </g>
+</svg>

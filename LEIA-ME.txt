@@ -1,0 +1,19 @@
+COMO SUBIR NO FILE MANAGER DO WORDPRESS/HOSTINGER
+
+1. Envie a pasta inteira para o File Manager.
+2. Mantenha o arquivo index.html no mesmo nível da pasta images.
+3. Exemplo de estrutura:
+   /385-producoes/
+     index.html
+     /images/
+       logo-385.svg
+       hero-evento.svg
+       painel-led.svg
+       ...
+
+IMPORTANTE:
+- As imagens atuais são placeholders em SVG, criadas para a página funcionar offline.
+- Para trocar por fotos reais, substitua os arquivos dentro da pasta images mantendo os mesmos nomes ou edite os caminhos no index.html.
+- O formulário é visual. Para enviar contatos de verdade, precisa conectar com plugin, script, WhatsApp ou CRM.
+- Trocar WhatsApp: pesquise por https://wa.me/5500000000000 no index.html.
+- Trocar telefone/e-mail/CNPJ: edite no rodapé e nos links.
