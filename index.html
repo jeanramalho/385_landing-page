@@ -599,6 +599,23 @@
       border-color: #ff6a00
     }
 
+    input[type="date"] {
+      color-scheme: dark
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      background-color: rgba(255, 106, 0, .16);
+      border-radius: 999px;
+      cursor: pointer;
+      filter: invert(49%) sepia(95%) saturate(2765%) hue-rotate(1deg) brightness(103%) contrast(105%);
+      opacity: 1;
+      padding: 4px
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      background-color: rgba(255, 106, 0, .28)
+    }
+
     textarea {
       min-height: 120px;
       resize: vertical
