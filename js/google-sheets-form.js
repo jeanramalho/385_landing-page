@@ -1,5 +1,5 @@
 const GOOGLE_SHEETS_FORM_CONFIG = {
-  endpoint: 'COLE_AQUI_A_URL_DO_WEB_APP_DO_GOOGLE_APPS_SCRIPT',
+  endpoint: 'https://script.google.com/macros/s/AKfycbxKGi0zAMU4wLOV4nxiWo0-z_Wcmunu5z5bBWMd9xUNyYatWrwosnAZOBxkB6dtX0k/exec',
   formSelector: '[data-google-sheets-form]',
   successSelector: '#formSuccess',
   sheetName: 'Leads',
