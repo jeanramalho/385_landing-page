@@ -1089,17 +1089,17 @@
       <p class="section-subtitle">Preencha as informações abaixo e a equipe da 385 Produções entrará em contato para
         entender o seu evento e indicar a estrutura ideal.</p>
       <div class="quote-card">
-        <form id="quoteForm">
+        <form id="quoteForm" data-google-sheets-form>
           <div class="form-grid">
-            <div class="form-group"><label>Nome Completo</label><input required type="text" placeholder="Seu nome">
+            <div class="form-group"><label>Nome Completo</label><input required type="text" name="nome_completo" autocomplete="name" placeholder="Seu nome">
             </div>
-            <div class="form-group"><label>Telefone / WhatsApp</label><input required type="tel"
+            <div class="form-group"><label>Telefone / WhatsApp</label><input required type="tel" name="telefone_whatsapp" autocomplete="tel"
                 placeholder="(00) 00000-0000"></div>
-            <div class="form-group"><label>Cidade e Local</label><input required type="text"
+            <div class="form-group"><label>Cidade e Local</label><input required type="text" name="cidade_local"
                 placeholder="Onde será o evento?"></div>
-            <div class="form-group"><label>Data do Evento</label><input required type="date" placeholder="DD/MM/AAAA">
+            <div class="form-group"><label>Data do Evento</label><input required type="date" name="data_evento" placeholder="DD/MM/AAAA">
             </div>
-            <div class="form-group full"><label>Tipo de estrutura necessária</label><select required>
+            <div class="form-group full"><label>Tipo de estrutura necessária</label><select required name="tipo_estrutura">
                 <option value="">Selecione uma opção</option>
                 <option>Painel de LED</option>
                 <option>Som</option>
@@ -1109,15 +1109,14 @@
                 <option>Estrutura completa</option>
                 <option>Ainda não sei, preciso de ajuda</option>
               </select></div>
-            <div class="form-group full"><label>Mensagem Adicional</label><textarea
+            <div class="form-group full"><label>Mensagem Adicional</label><textarea name="mensagem_adicional"
                 placeholder="Conte mais sobre seu evento..."></textarea></div>
           </div><button class="btn-primary" type="submit" style="width:100%">Enviar pedido de orçamento</button>
         </form>
         <div class="form-success" id="formSuccess">
           <div class="form-success-icon">✓</div>
           <h3>Obrigado pelo contato!</h3>
-          <p>Recebemos suas informações. Para fazer esse formulário enviar para e-mail/WhatsApp, é necessário conectar
-            um script, plugin ou formulário do WordPress.</p>
+          <p>Recebemos suas informações. A equipe da 385 Produções entrará em contato para entender seu evento.</p>
         </div>
       </div>
     </div>
@@ -1185,8 +1184,8 @@
     function closeMenu() { document.getElementById('mobileNav').classList.remove('active') }
     function scrollToQuote() { document.getElementById('orcamento').scrollIntoView({ behavior: 'smooth' }); closeMenu() }
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('quoteForm').addEventListener('submit', function (e) { e.preventDefault(); this.style.display = 'none'; document.getElementById('formSuccess').classList.add('active') });
   </script>
+  <script src="js/google-sheets-form.js"></script>
 </body>
 
 </html>

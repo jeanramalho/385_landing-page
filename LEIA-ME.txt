@@ -14,6 +14,36 @@ COMO SUBIR NO FILE MANAGER DO WORDPRESS/HOSTINGER
 IMPORTANTE:
 - As imagens atuais são placeholders em SVG, criadas para a página funcionar offline.
 - Para trocar por fotos reais, substitua os arquivos dentro da pasta images mantendo os mesmos nomes ou edite os caminhos no index.html.
-- O formulário é visual. Para enviar contatos de verdade, precisa conectar com plugin, script, WhatsApp ou CRM.
+- O formulário envia contatos para Google Sheets usando o arquivo js/google-sheets-form.js.
 - Trocar WhatsApp: pesquise por https://wa.me/5500000000000 no index.html.
 - Trocar telefone/e-mail/CNPJ: edite no rodapé e nos links.
+
+COMO LIGAR O FORMULÁRIO AO GOOGLE SHEETS
+
+1. Crie ou abra a planilha que será usada como banco de dados.
+2. Copie o ID da planilha pela URL:
+   https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit
+3. Na planilha, acesse Extensões > Apps Script.
+4. Apague o código padrão e cole o conteúdo do arquivo:
+   google-apps-script/sheets-web-app.js
+5. No Apps Script, troque:
+   const SPREADSHEET_ID = 'COLE_AQUI_O_ID_DA_SUA_PLANILHA';
+   pelo ID real da sua planilha.
+6. Clique em Implantar > Nova implantação.
+7. Tipo: App da Web.
+8. Executar como: Eu.
+9. Quem pode acessar: Qualquer pessoa.
+10. Clique em Implantar e autorize o acesso.
+11. Copie a URL do Web App.
+12. No arquivo js/google-sheets-form.js, troque:
+    endpoint: 'COLE_AQUI_A_URL_DO_WEB_APP_DO_GOOGLE_APPS_SCRIPT',
+    pela URL copiada.
+
+CONFIGURAÇÕES RÁPIDAS
+
+- Nome da aba da planilha:
+  edite sheetName em js/google-sheets-form.js.
+- Colunas salvas:
+  edite COLUMNS e appendRow em google-apps-script/sheets-web-app.js.
+- Campos do formulário:
+  mantenha o atributo name de cada campo do index.html igual ao usado no Apps Script.
