@@ -483,7 +483,17 @@
       position: relative;
       aspect-ratio: 16/9;
       overflow: hidden;
-      cursor: pointer
+      cursor: pointer;
+      background: #111;
+      border: 0;
+      color: inherit;
+      display: block;
+      width: 100%
+    }
+
+    .portfolio-item:focus-visible {
+      outline: 2px solid #ff6a00;
+      outline-offset: 4px
     }
 
     .portfolio-item img {
@@ -508,6 +518,75 @@
 
     .portfolio-item:hover::after {
       opacity: 1
+    }
+
+    .gallery-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, .62);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .28s ease, visibility .28s ease
+    }
+
+    .gallery-lightbox.active {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .gallery-lightbox-content {
+      position: relative;
+      max-width: min(1120px, 92vw);
+      max-height: 86vh;
+      transform: scale(.96) translateY(12px);
+      transition: transform .28s ease
+    }
+
+    .gallery-lightbox.active .gallery-lightbox-content {
+      transform: scale(1) translateY(0)
+    }
+
+    .gallery-lightbox img {
+      max-width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      border: 1px solid rgba(255, 255, 255, .12);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .55)
+    }
+
+    .gallery-lightbox-close {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .78);
+      color: #fff;
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .2s
+    }
+
+    .gallery-lightbox-close:hover,
+    .gallery-lightbox-close:focus-visible {
+      background: #ff6a00;
+      border-color: #ff6a00;
+      outline: 0
+    }
+
+    body.gallery-open {
+      overflow: hidden
     }
 
     /* ----------------------- BLOCO DE FORMULÁRIO / ORÇAMENTO ----------------------- */
@@ -830,6 +909,15 @@
       }
     }
 
+    @media(prefers-reduced-motion: reduce) {
+
+      .gallery-lightbox,
+      .gallery-lightbox-content,
+      .portfolio-item img {
+        transition: none
+      }
+    }
+
     @media(max-width:1024px) {
       .benefits-grid {
         grid-template-columns: repeat(2, 1fr)
@@ -897,6 +985,15 @@
 
       .brand img {
         height: 36px
+      }
+
+      .gallery-lightbox {
+        padding: 16px
+      }
+
+      .gallery-lightbox-close {
+        top: 10px;
+        right: 10px
       }
     }
   </style>
@@ -1088,12 +1185,24 @@
       <p class="section-subtitle">Veja alguns projetos realizados pela 385 Produções e conheça na prática como nossos
         equipamentos ajudam a transformar a experiência do público.</p>
       <div class="portfolio-grid">
-        <div class="portfolio-item"><img src="images/portfolio-1.webp" alt="Evento corporativo"></div>
-        <div class="portfolio-item"><img src="images/portfolio-2.webp" alt="Show ao vivo"></div>
-        <div class="portfolio-item"><img src="images/portfolio-3.webp" alt="Feira e congresso"></div>
-        <div class="portfolio-item"><img src="images/portfolio-4.webp" alt="Evento em igreja"></div>
-        <div class="portfolio-item"><img src="images/portfolio-5.webp" alt="Ação promocional"></div>
-        <div class="portfolio-item"><img src="images/portfolio-6.webp" alt="Grande produção"></div>
+        <button class="portfolio-item" type="button" data-gallery-item aria-label="Ampliar imagem: Evento corporativo">
+          <img src="images/portfolio-1.webp" alt="Evento corporativo">
+        </button>
+        <button class="portfolio-item" type="button" data-gallery-item aria-label="Ampliar imagem: Show ao vivo">
+          <img src="images/portfolio-2.webp" alt="Show ao vivo">
+        </button>
+        <button class="portfolio-item" type="button" data-gallery-item aria-label="Ampliar imagem: Feira e congresso">
+          <img src="images/portfolio-3.webp" alt="Feira e congresso">
+        </button>
+        <button class="portfolio-item" type="button" data-gallery-item aria-label="Ampliar imagem: Evento em igreja">
+          <img src="images/portfolio-4.webp" alt="Evento em igreja">
+        </button>
+        <button class="portfolio-item" type="button" data-gallery-item aria-label="Ampliar imagem: Ação promocional">
+          <img src="images/portfolio-5.webp" alt="Ação promocional">
+        </button>
+        <button class="portfolio-item" type="button" data-gallery-item aria-label="Ampliar imagem: Grande produção">
+          <img src="images/portfolio-6.webp" alt="Grande produção">
+        </button>
       </div><button class="btn-primary" type="button" onclick="scrollToQuote()">Solicitar estrutura para meu evento
         →</button>
     </div>
@@ -1196,11 +1305,78 @@
       <path d="M12 18h.01"></path>
     </svg></a>
 
+  <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+    <div class="gallery-lightbox-content" role="dialog" aria-modal="true" aria-label="Imagem ampliada do portfólio">
+      <button class="gallery-lightbox-close" type="button" aria-label="Fechar imagem ampliada">×</button>
+      <img alt="" id="galleryLightboxImage">
+    </div>
+  </div>
+
   <script>
     function toggleMenu() { document.getElementById('mobileNav').classList.toggle('active') }
     function closeMenu() { document.getElementById('mobileNav').classList.remove('active') }
     function scrollToQuote() { document.getElementById('orcamento').scrollIntoView({ behavior: 'smooth' }); closeMenu() }
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    function initPortfolioGallery() {
+      const galleryItems = document.querySelectorAll('[data-gallery-item]');
+      const lightbox = document.getElementById('galleryLightbox');
+      const lightboxImage = document.getElementById('galleryLightboxImage');
+      const closeButton = lightbox ? lightbox.querySelector('.gallery-lightbox-close') : null;
+      let activeTrigger = null;
+
+      if (!galleryItems.length || !lightbox || !lightboxImage || !closeButton) {
+        return;
+      }
+
+      function openLightbox(trigger) {
+        const image = trigger.querySelector('img');
+
+        if (!image) {
+          return;
+        }
+
+        activeTrigger = trigger;
+        lightboxImage.src = image.currentSrc || image.src;
+        lightboxImage.alt = image.alt;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('gallery-open');
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('gallery-open');
+        lightboxImage.removeAttribute('src');
+
+        if (activeTrigger) {
+          activeTrigger.focus();
+          activeTrigger = null;
+        }
+      }
+
+      galleryItems.forEach((item) => {
+        item.addEventListener('click', () => openLightbox(item));
+      });
+
+      closeButton.addEventListener('click', closeLightbox);
+
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    }
+
+    initPortfolioGallery();
   </script>
   <script src="js/google-sheets-form.js"></script>
 </body>
